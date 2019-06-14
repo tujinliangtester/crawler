@@ -1,0 +1,160 @@
+<html style="font-size: 67px;" class="responsive narrow"><head>
+    <title>猫眼专业版-实时票房</title>
+    <meta name="csrf" content="d3ce73f62a6a80960de7932069c6e2dd0fb2d49c">
+    <!--// dns prefetch -->
+    <link rel="dns-prefetch" href="//ms0.meituan.net">
+    <link rel="dns-prefetch" href="//mc.meituan.net">
+    <link rel="dns-prefetch" href="//s0.meituan.net">
+    <link rel="dns-prefetch" href="//p0.meituan.net">
+    <link rel="dns-prefetch" href="//p1.meituan.net">
+    <!-- 上报通道标识 -->
+    <meta name="lx:category" content="moviepro">
+    <!-- 上报应用标识 -->
+    <meta name="lx:appnm" content="moviepro">
+    <!-- 页面名称：i版_专业服务_影人详情页，上报页面标识 -->
+    <meta name="lx:cid" content="DashboardController">
+    <link rel="dns-prefetch" href="//analytics.meituan.com">
+    <link rel="dns-prefetch" href="//analytics.meituan.net">
+    <link rel="dns-prefetch" href="//wreport.meituan.net">
+    <link rel="dns-prefetch" href="//report.meituan.net">
+
+    <!--// meta section -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="猫眼票房分析,猫眼电影,电影票房,实时票房,日票房,预售票房,影片票房趋势,受众画像,实时排片,预售排片,上座率,历史票房">
+    <meta name="description" content="猫眼票房分析，提供准确的每日电影实时票房、排片、上座率查询，为电影从业者提供及时、专业的数据分析服务">
+    <meta http-equiv="cleartype" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-store">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <link rel="icon" type="image/x-icon" href="//s0.meituan.net/bs/?f=myfe/piaofang:img/favicon-f8defb48.ico">
+    <!--// apple webapp -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--// viewport -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <!--// cat -->
+    <script async="" src="https://s0.meituan.net/bs/js/?f=mta-js:mta.min.js"></script><script>
+    "use strict";!function(){var i=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"_Owl_",t=window;t[i]||(t[i]={isRunning:!1,isReady:!1,preTasks:[],dataSet:[],use:function(i,n){this.isReady&&t.Owl&&t.Owl[i](n),this.preTasks.push({api:i,data:[n]})},add:function(i){this.dataSet.push(i)},run:function(){var i=this;if(!this.isRunning){this.isRunning=!0;var n=t.onerror;t.onerror=function(){this.isReady||this.add({type:"jsError",data:arguments}),n&&n.apply(t,arguments)}.bind(this),(t.addEventListener||t.attachEvent)("error",function(t){i.isReady||i.add({type:"resError",data:[t]})},!0)}}},t[i].run())}();
+    </script>
+    
+    <link rel="stylesheet" href="//s0.meituan.net/bs/?f=myfe/piaofang:/client/css/common-82762e11.css">
+    
+    <link rel="stylesheet" href="//s0.meituan.net/bs/?f=myfe/piaofang:/client/css/pages-dashboard-3cb90b51.css">
+    
+    
+    <script>
+      (function() {
+        var timer = null;
+        function scale() {
+          var html = document.documentElement;
+          var r = html.clientWidth/1920;
+          html.style.fontSize = Math.ceil(r*100) + 'px';
+          html.classList.add('responsive');
+          var s = html.clientWidth/html.clientHeight;
+          if (s < 1.5) {
+            html.classList.add('narrow');
+          } else {
+            html.classList.remove('narrow');
+          }
+          timer = null;
+        }
+        window.onresize = function() {
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(scale, 100);
+        }
+        scale();
+      })();
+    </script>
+    
+    <script>
+      /*
+       * workaround for image onError(copy from header.hbs)
+       * chrome对于同一图片的error事件只触发一次
+       * @see https://stackoverflow.com/questions/17636397/why-is-chromes-onerror-event-for-the-img-element-only-fired-once
+       * 由于页面采用server render, 如果服务器端render，而图片的地址错误，会导致
+       * 客户端render前图片已经报错了, 无法通过React.onError监听
+       */
+       document.addEventListener('DOMContentLoaded', function() {
+         var images = document.querySelectorAll('.need-handle-pic');
+         for(var i = 0; i < images.length; i++) {
+           var imgItem = images[i];
+           var className = imgItem.className;
+           var src = imgItem.getAttribute('src');
+           if (!src) {
+             imgItem.className = className + ' has-no-pic';
+             imgItem.setAttribute('alt', '');
+           } else {
+             imgItem.onerror = function(e) {
+               e.target.className = className + ' has-error-pic';
+               e.target.setAttribute('alt', '');
+             }
+           }
+         }
+       });
+    </script>
+  </head>
+  <body>
+    <div id="app"><div class="dashboard-page" data-reactroot=""><div class="dashboard"><div class="dashboard-title"><span class="dashboard-nav"><span class="active">综合票房</span><span class="">分账票房</span></span><div class="dashboard-title-clock"><span class="sprite sprite-logo"></span><span class="clock"><span><span>2019<!-- -->年<!-- -->06<!-- -->月<!-- -->14<!-- -->日</span>&nbsp;<span><!-- -->17<!-- -->:<!-- -->07</span></span></span></div><div class="dashboard-title-group"><div class="dashboard-title-togglefullscreen button">全屏</div><div class="dashboard-title-link button"><a href="/?ver=normal">返回常规版<span class="sprite sprite-arrow"></span></a></div></div></div><div class="dashboard-content"><div class="dashboard-left"><div class="dashboard-detail bg"><div class="movie-hint">点击&nbsp;<span class="sprite sprite-star-big"></span>&nbsp;优先展示</div></div><div class="dashboard-push"></div><div class="dashboard-calendar bg"></div></div><div class="dashboard-list bg"><table class="dashboard-table dashboard-table-header"><thead><tr><th class="moviename-th"><div><span>影片</span><span class="mn"> (点击 <span class="sprite sprite-tiny-star"></span> 优先展示)</span></div></th><th><div class="theader">综合票房(万)</div></th><th><div class="theader">票房占比</div></th><th><div class="theader">排片场次</div></th><th><div class="theader">排片占比</div></th><th><div class="theader">场均人次</div></th><th><div class="theader">上座率</div></th></tr></thead></table><div class="movielist-container"><div class="movielist"></div></div></div></div></div></div></div>
+    <script>var AppData = {"useKNB":true,"title":"猫眼专业版-实时票房","$autoLayout":true,"$mobile":false,"host":"https:\u002F\u002Fbox.maoyan.com","calendar":{"today":"2019-06-14","selectMinDate":"2011-01-01","selectDate":"2019-06-14","selectMaxDate":"2019-06-29"},"$query":{},"$config":{"sentry":{"api":"http:\u002F\u002Fsentry7.sankuai.com\u002F81","appId":"7ca46ff13ccc4bb68f308d890ee47552","appSecret":"b504d937d8ca44a6b9e276dc6ea090c1","disable":false}},"$renderTime":1560503221472};</script>
+    <script crossorigin="anonymous" src="//www.dpfile.com/app/owl/static/owl_1.6.3.js"></script>
+    <script>
+      if (window.Owl) {
+        Owl.start({
+          
+          project: 'movie-pro-nbox',
+        });
+      }
+    </script>
+    <!-- xNB 相关 -->
+    <script>
+       window.useKNB=true; 
+      window._KNB_IGNORE_WECHAT=true;
+    </script>
+    
+      
+      
+      <script src="//s0.meituan.net/bs/knb/v1.6.6/knb.js"></script>
+      
+    
+
+    <script>
+      window.felisConfig = {
+        debug: false,
+        combo: '//s0.meituan.net/bs/file-lazy?f=',
+        modules: [{"m":"/modules/@myfe/felis-lib.js","v":"7f208dbb","s":116542},{"m":"/modules/object-assign.js","v":"09d6e9c8","s":1735},{"m":"/client/components/button/button.js","v":"fd9be03f","s":2276},{"m":"/client/components/image.js","v":"96317eb5","s":3428},{"m":"/client/components/nav-bar.js","v":"46ba0805","s":3572},{"m":"/common/cookie.js","v":"82b62e99","s":593},{"m":"/common/env.js","v":"4980eb5a","s":3242},{"m":"/common/tools.js","v":"a3a52459","s":7524},{"m":"/common/xnb/knb-impl.js","v":"07e6d0c9","s":6209},{"m":"/common/zepto.js","v":"db3e1601","s":28712},{"m":"/common/nAjax.js","v":"44ac64d4","s":1401},{"m":"/common/xnb/mtnb-bridge.js","v":"93281367","s":1804},{"m":"/common/xnb/mtnb-impl.js","v":"bea0a157","s":7005},{"m":"/common/wechat.js","v":"59c6f96f","s":2095},{"m":"/common/xnb/wechat-bridge.js","v":"3e87b048","s":1421},{"m":"/common/xnb.js","v":"5b29a380","s":1298},{"m":"/client/common/utils/xnb.js","v":"f4e89d5c","s":305},{"m":"/client/common/libs/polyfill.js","v":"5b906e9e","s":2991},{"m":"/client/common/libs/zepto.js","v":"db3e1601","s":28712},{"m":"/client/common/utils/tools.js","v":"c2360fc4","s":7121},{"m":"/client/common/utils/env.js","v":"12b8fe91","s":2879},{"m":"/client/components/link.js","v":"23959395","s":3535},{"m":"/client/components/download/bottom-bar.js","v":"0c6ada79","s":2153},{"m":"/client/common/page.js","v":"0662a24f","s":5190},{"m":"/client/components/clock.js","v":"2d136749","s":1769},{"m":"/client/vendor/solarlunar.js","v":"7f49fed5","s":12444},{"m":"/client/common/festival.js","v":"b8cb8e5e","s":942},{"m":"/client/components/calendar-pc.js","v":"ec607331","s":7204},{"m":"/client/components/stopwatch.js","v":"ae459105","s":2369},{"m":"/modules/superagent.js","v":"402b2887","s":11265},{"m":"/client/common/request.js","v":"c368cbfc","s":1215},{"m":"/client/common/util.js","v":"b72d3d48","s":3676},{"m":"/client/common/fullscreen.js","v":"b9ec503f","s":730},{"m":"/client/pages/dashboard.js","v":"f2934958","s":13893}],
+        comboPrefix: 'myfe/piaofang:',
+      };
+      window.pageId = 'DashboardController';
+    </script>
+    
+    
+    <script src="//s0.meituan.net/bs/?f=myfe/piaofang:/client/stat-01c873d3.js" async=""></script>
+    
+    <script src="//s0.meituan.net/bs/?f=myfe/piaofang:/common/felis-6edb4ee1.js" async=""></script>
+    
+
+    <!-- 灵犀统计 -->
+    <script type="text/javascript">
+      !(function (win, doc, ns) {
+        var cacheFunName = '_MeiTuanALogObject';
+        win[cacheFunName] = ns;
+        if (!win[ns]) {
+          var _LX = function () {
+            _LX.q.push(arguments);
+            return _LX;
+          };
+          _LX.q = _LX.q || [];
+          _LX.l = +new Date();
+          win[ns] = _LX;
+        }
+      })(window, document, 'LXAnalytics');
+    </script>
+    
+    <script src="//analytics.meituan.net/analytics.js" type="text/javascript" charset="utf-8" async="" defer=""></script>
+  
+
+</body></html>
