@@ -13,7 +13,6 @@ class AppDynamicsJob(unittest.TestCase):
         # AppDynamics will automatically override this web driver
         # as documented in https://docs.appdynamics.com/display/PRO44/Write+Your+First+Script
         self.driver = webdriver.Firefox()
-        self.driver.minimize_window()
         self.driver.implicitly_wait(30)
         self.base_url = "https://www.katalon.com/"
         self.verificationErrors = []
@@ -21,14 +20,12 @@ class AppDynamicsJob(unittest.TestCase):
 
     def test_app_dynamics_job(self):
         driver = self.driver
-        driver.get("https://piaofang.maoyan.com/?ver=normal")
-        print('normal',driver.page_source)
+        driver.get("https://movie.douban.com/")
+        driver.find_element_by_id("inp-query").click()
+        driver.find_element_by_id("inp-query").clear()
+        driver.find_element_by_id("inp-query").send_keys(u"黑衣人：全球追缉")
         driver.find_element_by_xpath(
-            u"(.//*[normalize-space(text()) and normalize-space(.)='明天'])[1]/following::span[1]").click()
-        driver.find_element_by_xpath(
-            u"(.//*[normalize-space(text()) and normalize-space(.)='儿童节'])[1]/following::span[4]").click()
-        print('other day',driver.page_source)
-
+            u"(.//*[normalize-space(text()) and normalize-space(.)='搜索：'])[1]/following::input[2]").click()
 
     def is_element_present(self, how, what):
         try:
@@ -60,7 +57,6 @@ class AppDynamicsJob(unittest.TestCase):
         # To know more about the difference between verify and assert,
         # visit https://www.seleniumhq.org/docs/06_test_design_considerations.jsp#validating-results
         self.assertEqual([], self.verificationErrors)
-
 
 
 if __name__ == "__main__":
