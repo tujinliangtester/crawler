@@ -3,16 +3,24 @@ from bs4 import BeautifulSoup
 import re, time
 
 from bs4.element import Tag
-import pymongo
-
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-# dblist = myclient.list_database_names()
-# print(dblist)
-mydb = myclient["NationalDayOnWeiBo"]
-
-# MongoDB 使用数据库对象来创建集合
-mycol = mydb["NationalDayOnWeiBoSet"]
-
+import pymysql
+#
+# # 打开数据库连接
+# db = pymysql.connect("localhost", "root", "123456", "muorie")
+#
+# # 使用cursor()方法获取操作游标
+# cursor = db.cursor()
+#
+# # 使用execute方法执行SQL语句
+# cursor.execute("SELECT VERSION()")
+#
+# # 使用 fetchone() 方法获取一条数据
+# data = cursor.fetchone()
+#
+# print ("Database version : %s " % data)
+#
+# # 关闭数据库连接
+# db.close()
 
 driver = webdriver.Firefox()
 driver.maximize_window()
@@ -33,27 +41,53 @@ while True:
 
 i = 0
 while (True):
-    if(i>10000):break
+    if(i>10):break
     time.sleep(3)
     list=[]
     i+=1
     soup = BeautifulSoup(driver.page_source)
-    link_nodes = soup.find_all('p', {'node-type':'feed_list_content'})
+    link_nodes = soup.find_all('div', {'action-type':'feed_list_item'})
     for link_node in link_nodes:
         dic = {}
-        feed_list_content = link_node.get_text().strip()
-        nickname=link_node.get('nick-name')
-
-        print(feed_list_content)
-        print(nickname)
+        nickname=link_node.find('a',{'class':'name'}).get_text().strip()
         dic['nickname']=nickname
+
+        feed_list_content = link_node.find('p',{'node-type':'feed_list_content'}).get_text().strip()
         dic['feed_list_content']=feed_list_content
+
+        site_detail=link_node.find('p',{'node-type':'feed_list_content'}).find_all('a')
+        if(len(site_detail)>0):
+            site_detail=site_detail[-1]
+            site_detail_i=site_detail.find('i')
+            if(site_detail_i is not None):
+                if(site_detail.find('i').get_text().strip()=='2'):
+                    site_detail=site_detail.get_text().strip()
+                    dic['site_detail'] = site_detail[1:]
+
+        feed_list_media_prev=link_node.find('div',{'node-type':'feed_list_media_prev'})
+        if(feed_list_media_prev is not None):
+            img_src_strs=''
+            imgs=feed_list_media_prev.find_all('img')
+            for img in imgs:
+                img_src_strs+=','+img.get('src')
+            dic['feed_list_media_prev']=img_src_strs
+
+        fl_h5_video_disp=link_node.find('div',{'node-type':'fl_h5_video_disp'})
+        if(fl_h5_video_disp is not None):
+            src=fl_h5_video_disp.find('video')
+            if(src is not None):
+                src=src.get('src')
+            dic['fl_h5_video_disp']=src
+        print('*'*20,i,'*'*20)
+        print(dic)
         list.append(dic)
 
-    mycol.insert_many(list)
+    # mycol.insert_many(list)
     if(i%50==0):time.sleep(600)
     # 下一页
-    driver.find_element_by_link_text(u"下一页").click()
+    el=soup.find('a',{'class':'next'})
+    driver.find_element_by_class_name('next').click()
+    # driver.find_element_by_link_text(u"下一页").click()
 
 
 
