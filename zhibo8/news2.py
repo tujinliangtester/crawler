@@ -28,13 +28,13 @@ for (i,title) in enumerate(titles):
     tmp='(//div[@class="box"])[{}]/div[@class="content"]//li'.format(i+1)
     contents = driver.find_elements_by_xpath(tmp)
     cs=[]
-    for c in contents:
+    for (j,c) in enumerate(contents):
         tmpC={}
         if(str(c.get_attribute('style')).find('display: none')>-1):
             continue
         tmpC['text']=c.text
 
-        imgs=driver.find_elements_by_xpath(tmp+'//img')
+        imgs=driver.find_elements_by_xpath(tmp+'[{}]//img'.format(j+1))
         imgUrlList=[]
         for img in imgs:
             imgUrlList.append(img.get_attribute('src'))
