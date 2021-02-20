@@ -7,15 +7,16 @@ driver.maximize_window()
 # driver.minimize_window()
 driver.implicitly_wait(30)
 
-film_name='C:/tjl/临时/725d4a7401f69e3143329465.txt'
+film_name='C:\\Users\\Administrator\\Desktop\\tmp\\1.txt'
 
-url='https://wenku.baidu.com/view/725d4a7401f69e3143329465.html'
+url='https://wenku.baidu.com/view/f30c2b81fe00bed5b9f3f90f76c66137ef064f23.html'
 driver.get(url)
-time.sleep(10)
+# 手动操作一下
+time.sleep(20)
 soup = BeautifulSoup(driver.page_source)
 
 # link_nodes = soup.find('p', class_="reader-word-layer")
-link_nodes = soup.findAll('p', class_="p-txt")
+link_nodes = soup.findAll('p', class_="reader-word-layer")
 tmp=''
 print(link_nodes)
 
