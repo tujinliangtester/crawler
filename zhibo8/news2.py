@@ -22,6 +22,9 @@ time.sleep(1)
 titles=driver.find_elements_by_xpath('//div[@class="box"]/div[@class="titlebar"]')
 targetList=[]
 for (i,title) in enumerate(titles):
+    if(i==16):
+        break
+    print('\r','第{}次循环'.format(i),end='',flush=True)
     tmp='(//div[@class="box"])[{}]/div[@class="content"]//li'.format(i+1)
     contents = driver.find_elements_by_xpath(tmp)
     cs=[]
