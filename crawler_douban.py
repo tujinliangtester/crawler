@@ -31,7 +31,7 @@ for i,name in enumerate(tmp_list):
     try:
         link_node = soup.find('span', class_="rating_nums")
         tmp = link_node.get_text()
-        # tmp_list=tmp.split('\n')
+        # tmp_list=tmp.json.split('\n')
         dic[name]=tmp
     except:
         print('评分没有找到，可能是暂无评分，用0分代替')

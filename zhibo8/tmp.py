@@ -1,6 +1,6 @@
 import json
 dicB=[]
-with open('./tmp','r',encoding='utf8') as f:
+with open('tmp.json', 'r', encoding='utf8') as f:
     content=f.read()
     contentJson=json.loads(content)
     for i in contentJson:
@@ -24,4 +24,4 @@ with open('./tmp','r',encoding='utf8') as f:
 
 print(dicB)
 with open('./tmp2.json','w') as f:
-    f.write(dicB)
+    f.write(str(dicB))

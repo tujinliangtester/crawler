@@ -7,7 +7,7 @@ driver.maximize_window()
 # driver.minimize_window()
 driver.implicitly_wait(30)
 
-film_name='C:\\Users\\Administrator\\Desktop\\tmp\\1.txt'
+film_name='C:\\Users\\Administrator\\Desktop\\tmp.json\\1.txt'
 
 url='https://wenku.baidu.com/view/f30c2b81fe00bed5b9f3f90f76c66137ef064f23.html'
 driver.get(url)
@@ -47,9 +47,9 @@ for i,name in enumerate(tmp_list):
     soup = BeautifulSoup(driver.page_source)
     try:
         link_node = soup.find('span', class_="rating_nums")
-        tmp = link_node.get_text()
-        # tmp_list=tmp.split('\n')
-        dic[name]=tmp
+        tmp.json = link_node.get_text()
+        # tmp_list=tmp.json.split('\n')
+        dic[name]=tmp.json
     except:
         print('评分没有找到，可能是暂无评分，用0分代替')
         dic[name] = 0

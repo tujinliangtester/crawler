@@ -48,7 +48,7 @@ for (i,title) in enumerate(titles):
 driver.close()
 print(targetList)
 import  json
-with open('tmp','w',encoding='utf8') as f:
+with open('tmp.json', 'w', encoding='utf8') as f:
     f.write('[')
     for i in targetList:
         f.write(json.dumps(i).encode('gbk').decode('unicode_escape'))
